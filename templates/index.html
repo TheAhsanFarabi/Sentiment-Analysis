@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Sentiment Analysis</h2>
+    <form id="sentimentForm">
+        <label for="textInput">Enter text to analyze:</label><br>
+        <textarea id="textInput" name="textInput"></textarea><br>
+        <button type="button" onclick="analyzeSentiment()">Analyze</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        function analyzeSentiment() {
+            var text = document.getElementById("textInput").value;
+            if (text.trim() === "") {
+                alert("Please enter some text.");
+                return;
+            }
+
+            // Make an AJAX request to analyze sentiment
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/analyze_sentiment", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var result = JSON.parse(xhr.responseText);
+                    document.getElementById("result").innerText = "Sentiment: " + result.sentiment;
+                }
+            };
+            xhr.send(JSON.stringify({ text: text }));
+        }
+    </script>
+</body>
+</html>
