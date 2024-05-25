@@ -49,7 +49,3 @@ This is a simple web application built with Flask that performs sentiment analys
 ## Contributing
 
 Contributions are welcome! Please feel free to fork the repository and submit pull requests to suggest improvements or fix any issues.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
